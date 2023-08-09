@@ -75,6 +75,14 @@ Take some time to familiarize yourself with the data you've uploaded into Snowfl
 ### Reporting
 <img src="./Project Design a Data Warehouse for Reporting and OLAP/ScreenShots/SQL code to reports the business name, temperature, precipitation, and ratings.png">
 
+## SQL Scripts
+<ul>
+    <li><a href="./Project Design a Data Warehouse for Reporting and OLAP/SQL Script RAW to STAGING.sql">SQL queries code that transforms staging to ODS.</a></li>
+    <li><a href="./Project Design a Data Warehouse for Reporting and OLAP/SQL STAGING to ODS.sql">SQL queries code that specifically uses JSON functions to transform data from a single JSON structure of staging to multiple columns of ODS.</a></li>
+    <li><a href="./Project Design a Data Warehouse for Reporting and OLAP/SQL ODS to DWH.sql">SQL queries code necessary to move the data from ODS to DWH.</a></li>
+    <li><a href="./Project Design a Data Warehouse for Reporting and OLAP/SQL Integrating Climate and Yelp data.sql">SQL queries code to integrate climate and Yelp data</a></li>
+    <li><a href="./Project Design a Data Warehouse for Reporting and OLAP/SQL reporting business,temperature, precipitation.sql">SQL queries code that reports the business name, temperature, precipitation, and ratings.</a></li>
+</ul>
 
 ## Conclusion
 
