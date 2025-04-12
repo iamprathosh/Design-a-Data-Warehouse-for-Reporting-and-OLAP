@@ -2,38 +2,37 @@
 --CREATE USER TABLE IN ODS AREA
 ---------------------------------------------------
 CREATE TABLE DIM_BUSINESS(
-   business_id VARCHAR(50) PRIMARY KEY,
-   name VARCHAR(200),
-   address VARCHAR(200),
-   city VARCHAR(100),
-   state VARCHAR(100),
-   postal_code VARCHAR(30),
-   latitude FLOAT,
-   longitude FLOAT,
-   stars FLOAT,
-   review_count DECIMAL(18,3),
-   is_open INT,
-   attributes VARIANT,
-   categories VARCHAR,
-   hours VARIANT
+   business_key VARCHAR(50) PRIMARY KEY,
+   business_name VARCHAR(200),
+   business_address VARCHAR(200),
+   business_city VARCHAR(100),
+   business_state VARCHAR(100),
+   business_postal_code VARCHAR(30),
+   business_latitude FLOAT,
+   business_longitude FLOAT,
+   business_stars FLOAT,
+   business_review_count DECIMAL(18,3),
+   business_is_open INT,
+   business_attributes VARIANT,
+   business_categories VARCHAR,
+   business_hours VARIANT
 );
 
-
 INSERT INTO DIM_BUSINESS(
-    business_id,
-    name, 
-    address, 
-    city,
-    state,
-    postal_code,
-    latitude, 
-    longitude, 
-    stars,
-    review_count, 
-    is_open,
-    attributes,
-    categories,
-    hours)
+    business_key,
+    business_name, 
+    business_address, 
+    business_city,
+    business_state,
+    business_postal_code,
+    business_latitude, 
+    business_longitude, 
+    business_stars,
+    business_review_count, 
+    business_is_open,
+    business_attributes,
+    business_categories,
+    business_hours)
 SELECT business_id,
     name, 
     address, 
@@ -50,28 +49,27 @@ SELECT business_id,
     hours
 FROM "YELP_DATA_WAREHOUSE"."ODS".businesses;
 
-
 ---------------------------------------------------
 --CREATE REVIEW TABLE  IN ODS AREA
 ---------------------------------------------------
 CREATE TABLE DIM_REVIEW(
-    review_id VARCHAR(22) PRIMARY KEY,
-    stars INT,
-    date VARCHAR(30),
-    text VARCHAR,
-    useful INT,
-    funny INT,
-    cool INT 
+    review_key VARCHAR(22) PRIMARY KEY,
+    review_stars INT,
+    review_date VARCHAR(30),
+    review_text VARCHAR,
+    review_useful INT,
+    review_funny INT,
+    review_cool INT 
 );
 
 INSERT INTO DIM_REVIEW(
-    cool,
-    date,
-    funny,
-    review_id,
-    stars,
-    text, 
-    useful
+    review_cool,
+    review_date,
+    review_funny,
+    review_key,
+    review_stars,
+    review_text, 
+    review_useful
 ) 
 SELECT 
     cool,
@@ -87,47 +85,47 @@ FROM "YELP_DATA_WAREHOUSE"."ODS".reviews;
 --CREATE USER TABLE IN ODS AREA
 ---------------------------------------------------
 CREATE TABLE DIM_USER(
-    user_id VARCHAR(22) PRIMARY KEY,
-    name VARCHAR(60),
-    review_count INT,
-    yelping_since VARCHAR(30),
-    friends VARCHAR,
-    useful INT,
-    funny INT,
-    cool INT,
-    fans INT,
-    elite VARCHAR,
-    average_stars DECIMAL(18,3),
-    compliment_hot INT,
-    compliment_more INT,
-    compliment_profile INT,
-    compliment_cute INT,
-    compliment_list INT,
-    compliment_note INT,
-    compliment_plain INT,
-    compliment_funny INT,
-    compliment_cool INT,
-    compliment_writer INT,
-    compliment_photos INT
+    user_key VARCHAR(22) PRIMARY KEY,
+    user_name VARCHAR(60),
+    user_review_count INT,
+    user_yelping_since VARCHAR(30),
+    user_friends VARCHAR,
+    user_useful INT,
+    user_funny INT,
+    user_cool INT,
+    user_fans INT,
+    user_elite VARCHAR,
+    user_average_stars DECIMAL(18,3),
+    user_compliment_hot INT,
+    user_compliment_more INT,
+    user_compliment_profile INT,
+    user_compliment_cute INT,
+    user_compliment_list INT,
+    user_compliment_note INT,
+    user_compliment_plain INT,
+    user_compliment_funny INT,
+    user_compliment_cool INT,
+    user_compliment_writer INT,
+    user_compliment_photos INT
 ); 
 
 INSERT INTO DIM_USER(
-    average_stars,
-    compliment_cool,
-    compliment_cute,
-    compliment_funny,
-    compliment_hot,
-    compliment_list,
-    compliment_more,
-    compliment_note,
-    compliment_photos,
-    compliment_plain,
-    compliment_profile,
-    compliment_writer,
-    cool,elite, fans,friends, 
-    funny,name,
-    review_count, useful,
-    user_id,yelping_since
+    user_average_stars,
+    user_compliment_cool,
+    user_compliment_cute,
+    user_compliment_funny,
+    user_compliment_hot,
+    user_compliment_list,
+    user_compliment_more,
+    user_compliment_note,
+    user_compliment_photos,
+    user_compliment_plain,
+    user_compliment_profile,
+    user_compliment_writer,
+    user_cool, user_elite, user_fans, user_friends, 
+    user_funny, user_name,
+    user_review_count, user_useful,
+    user_key, user_yelping_since
 )
 SELECT 
     average_stars,
@@ -142,11 +140,11 @@ SELECT
     compliment_plain,
     compliment_profile,
     compliment_writer,
-    cool,elite, 
-    fans,friends,
-    funny,name,
+    cool, elite, 
+    fans, friends,
+    funny, name,
     review_count,
-    useful,user_id, 
+    useful, user_id, 
     yelping_since
 FROM "YELP_DATA_WAREHOUSE"."ODS".users;
 
@@ -154,51 +152,53 @@ FROM "YELP_DATA_WAREHOUSE"."ODS".users;
 --CREATE CHECKIN TABLE IN ODS AREA
 ---------------------------------------------------
 CREATE TABLE DIM_CHECKIN(
-    business_id VARCHAR(22),
-    date VARCHAR
+    checkin_business_id VARCHAR(22),
+    checkin_date VARCHAR
 );
 
-INSERT INTO DIM_CHECKIN(business_id, date)
+INSERT INTO DIM_CHECKIN(checkin_business_id, checkin_date)
 SELECT business_id, checkin_date
 FROM "YELP_DATA_WAREHOUSE"."ODS".checkins;
+
 ---------------------------------------------------
 --CREATE TIP TABLE IN ODS AREA
 ---------------------------------------------------
 CREATE TABLE DIM_TIP(
-   text VARCHAR,
-   date VARCHAR(30) PRIMARY KEY,
-   compliment_count INT,
-   business_id VARCHAR(22),
-   user_id VARCHAR(22)
+   tip_text VARCHAR,
+   tip_date VARCHAR(30) PRIMARY KEY,
+   tip_compliment_count INT,
+   tip_business_id VARCHAR(22),
+   tip_user_id VARCHAR(22)
 );
 
-INSERT INTO DIM_TIP(business_id, compliment_count, date, text, user_id) 
+INSERT INTO DIM_TIP(tip_business_id, tip_compliment_count, tip_date, tip_text, tip_user_id) 
 SELECT business_id, compliment_count, tip_date, text, user_id
 FROM "YELP_DATA_WAREHOUSE"."ODS".tips;
+
 ---------------------------------------------------
 --CREATE COVID TABLE IN ODS AREA
 ---------------------------------------------------
 CREATE TABLE DIM_COVID(
-    business_id VARCHAR(22),
-    highlights VARCHAR,
-    delivery_or_takeout VARIANT,
-    grubhub_enabled VARIANT,
-    call_to_action_enabled VARIANT,
-    request_a_quote_enabled VARIANT,
-    covid_banner VARIANT,
-    temporary_closed_until VARIANT,
-    virtual_services_offered VARIANT
+    covid_business_id VARCHAR(22),
+    covid_highlights VARCHAR,
+    covid_delivery_or_takeout VARIANT,
+    covid_grubhub_enabled VARIANT,
+    covid_call_to_action_enabled VARIANT,
+    covid_request_a_quote_enabled VARIANT,
+    covid_covid_banner VARIANT,
+    covid_temporary_closed_until VARIANT,
+    covid_virtual_services_offered VARIANT
 );
 
-INSERT INTO DIM_COVID(Call_To_Action_enabled,
-    Covid_Banner,
-    Grubhub_enabled,
-    Request_a_Quote_Enabled, 
-    Temporary_Closed_Until,
-    Virtual_Services_Offered,
-    business_id,
-    delivery_or_takeout,
-    highlights)
+INSERT INTO DIM_COVID(covid_call_to_action_enabled,
+    covid_covid_banner,
+    covid_grubhub_enabled,
+    covid_request_a_quote_enabled, 
+    covid_temporary_closed_until,
+    covid_virtual_services_offered,
+    covid_business_id,
+    covid_delivery_or_takeout,
+    covid_highlights)
 
 SELECT 
       Call_To_Action_enabled,
@@ -217,22 +217,22 @@ FROM "YELP_DATA_WAREHOUSE"."ODS".covids;
 ---------------------------------------------------
 CREATE TABLE DIM_CLIMATE(
    climate_date DATE PRIMARY KEY,
-   min_temp FLOAT,
-   max_temp FLOAT,
-   normal_min_temp FLOAT,
-   normal_max_temp FLOAT,
-   precipitation VARCHAR(10),
-   precipitation_normal FLOAT
+   climate_min_temp FLOAT,
+   climate_max_temp FLOAT,
+   climate_normal_min_temp FLOAT,
+   climate_normal_max_temp FLOAT,
+   climate_precipitation VARCHAR(10),
+   climate_precipitation_normal FLOAT
 );
 
 INSERT INTO DIM_CLIMATE (
          climate_date, 
-         min_temp, 
-         max_temp, 
-         normal_min_temp,
-         normal_max_temp,
-         precipitation,
-         precipitation_normal
+         climate_min_temp, 
+         climate_max_temp, 
+         climate_normal_min_temp,
+         climate_normal_max_temp,
+         climate_precipitation,
+         climate_precipitation_normal
          )
 SELECT 
          temp.date_t, 
@@ -250,22 +250,22 @@ ON temp.date_t = prep.date_p;
 --CREATE FACT TABLE TABLE IN DWH AREA
 ---------------------------------------------------
 create table FACT_TABLE(
-   business_id VARCHAR(50),
-   review_id VARCHAR(22),
-   user_id VARCHAR(22),
-   climate_date DATE,
-   FOREIGN KEY (business_id) REFERENCES dim_business(business_id),
-   FOREIGN KEY (review_id) REFERENCES dim_review(review_id),
-   FOREIGN KEY (user_id) REFERENCES dim_user(user_id),
-   FOREIGN KEY (climate_date) REFERENCES dim_climate(climate_date)
+   fact_business_id VARCHAR(50),
+   fact_review_id VARCHAR(22),
+   fact_user_id VARCHAR(22),
+   fact_climate_date DATE,
+   FOREIGN KEY (fact_business_id) REFERENCES dim_business(business_key),
+   FOREIGN KEY (fact_review_id) REFERENCES dim_review(review_key),
+   FOREIGN KEY (fact_user_id) REFERENCES dim_user(user_key),
+   FOREIGN KEY (fact_climate_date) REFERENCES dim_climate(climate_date)
 );
-INSERT INTO fact_table(
-    business_id,
-    user_id,
-    review_id,
-    climate_date  
-)
 
+INSERT INTO FACT_TABLE(
+    fact_business_id,
+    fact_user_id,
+    fact_review_id,
+    fact_climate_date  
+)
 SELECT 
     rev.review_id,
     usr.user_id, 
@@ -276,10 +276,3 @@ JOIN "YELP_DATA_WAREHOUSE"."ODS".businesses AS bus
 ON bus.business_id  = rev.business_id
 JOIN "YELP_DATA_WAREHOUSE"."ODS".users AS usr
 ON rev.user_id = usr.user_id;
-
-
-
-
-
-
-   

@@ -1,12 +1,12 @@
--- SQL to report  business_name, temperature, precipitation, and rating
+-- SQL to report business_name, temperature, precipitation, and rating
 SELECT 
-    DISTINCT bus.name AS business_name,
-    clim.max_temp,
-    clim.min_temp,
-    clim.precipitation,
-    bus.stars as rating_stars
-FROM FACT_TABLE AS fact
-JOIN DIM_BUSINESS AS bus
-    ON fact.business_id = bus.business_id
-JOIN DIM_CLIMATE AS clim
-    ON fact.climate_date  = clim.climate_date;;
+    DISTINCT b.name AS business_name,
+    c.max_temp AS max_temperature,
+    c.min_temp AS min_temperature,
+    c.precipitation AS precipitation_amount,
+    b.stars AS business_rating
+FROM FACT_TABLE AS f
+JOIN DIM_BUSINESS AS b
+    ON f.fact_business_id = b.business_key
+JOIN DIM_CLIMATE AS c
+    ON f.fact_climate_date = c.climate_date;
