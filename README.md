@@ -86,4 +86,4 @@ Take some time to familiarize yourself with the data you've uploaded into Snowfl
 
 ## Conclusion
 
-This project empower me to delve into the relationship between weather conditions and restaurant reviews using real-world data and advanced data warehousing techniques. By applying the principles learned in the Designing Data Systems Course and leveraging Snowflake's capabilities, I created a robust infrastructure for reporting and OLAP analysis. Happy exploring!
+This project empowers me to delve into the relationship between weather conditions and restaurant reviews using real-world data and advanced data warehousing techniques. By applying the principles learned in the Designing Data Systems Course and leveraging Snowflake's capabilities, I created a robust infrastructure for reporting and OLAP analysis. Happy exploring!
